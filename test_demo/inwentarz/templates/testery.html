@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+
+
+<br>
+<div class='container'>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Numer seryjny</th>
+      <th>Licencja Car</th>
+      <th>Licencja HD</th>
+      <th>Właściciel</th>
+      <th>Wypożyczony</th>
+      <th>Data wypożyczenia</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+
+  {% for item in items %}
+
+    <tr class="table">
+      {% if item.wypozyczony == True %}
+        <td align="center"> <span class="dot-red"></span></td>
+      {% else %}
+        <td align="center"> <span class="dot-green"></span></td>
+      {% endif %}
+      <td>{{ item.numer_seryjny }}</td>
+      <td>{{ item.licencja_car|yesno:"Tak,Nie" }}</td>
+      <td>{{ item.licencja_hd|yesno:"Tak,Nie" }}</td>
+      <td>{{ item.dhandlowiec }}</td>
+      {% if item.wypozyczony == True %}
+        <td><a href="{% url 'historia_ph' %}?phandlowy_id={{item.phandlowy_id}}" method="post">{{ item.phandlowy }}</a></td>
+      {% else %}
+        <td>{{ item.wypozyczony|yesno:"Tak,Nie"}}</td>
+      {% endif %}
+        <td>{{ item.data_wypozyczenia }}</td>
+        <td>
+          <a href="{% url 'wypozycz_tester' item.numer_seryjny %}" class="btn btn-primary btn-sm" role="button">Wypożycz</a>
+        </td>
+    </tr>
+
+  {% endfor %}
+
+    </tbody>
+
+</table>
+</div>
+
+{% endblock %}

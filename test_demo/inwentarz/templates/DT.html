@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class='container'>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Imię</th>
+      <th>Nazwisko</th>
+      <th>e-mail</th>
+      <th>Telefon</th>
+      <th>Firma</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+
+  {% for item in items %}
+
+    <tr>
+      <td>{{ item.imie }}</td>
+      <td>{{ item.nazwisko }}</td>
+      <td>{{ item.email }}</td>
+      <td>{{ item.telefon }}</td>
+      <td>{{ item.firma }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+</div>
+
+{% endblock %}
