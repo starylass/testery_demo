@@ -46,6 +46,7 @@ def wypozycz_tester(request, numer_seryjny):
 
     if request.method == "POST":
         form = testerForm(request.POST, instance = item)
+        item.wypozyczony = True
         form.save()
         return redirect('display_testery')
 

@@ -5,4 +5,4 @@ from .models import *
 class testerForm(forms.ModelForm):
     class Meta:
         model = Tester
-        fields = ('phandlowy', 'data_wypozyczenia', 'wypozyczony')
+        fields = ('phandlowy', 'data_wypozyczenia')
