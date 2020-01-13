@@ -62,3 +62,7 @@ def historia_ph(request):
         'items': items,
     }
     return render(request, 'phandlowy.html', context)
+
+
+def dodaj_ph(request):
+    

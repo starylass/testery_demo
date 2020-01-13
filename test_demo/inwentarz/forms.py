@@ -6,3 +6,9 @@ class testerForm(forms.ModelForm):
     class Meta:
         model = Tester
         fields = ('phandlowy', 'data_wypozyczenia')
+
+
+class testerForm(forms.ModelForm):
+    class Meta:
+        model = Phandlowy
+        fields = ('imie', 'nazwisko', 'email', 'telefon', 'firma')
