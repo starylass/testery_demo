@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class='container'>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Ulica</th>
+      <th>Miejscowość</th>
+      <th>Kod pocztowy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  {% for item in items %}
+
+    <tr>
+      <td><a class="btn btn-primary btn-sm" href="{% url 'display_ph' %}?nazwa={{item.nazwa}}" role="button" method="post">{{ item.nazwa }}</a></td>
+      <td>{{ item.ulica }}</td>
+      <td>{{ item.miejscowosc }}</td>
+      <td>{{ item.kod_pocztowy }}</td>
+    </tbody>
+
+  {% endfor %}
+
+</table>
+</div>
+
+
+{% endblock %}
