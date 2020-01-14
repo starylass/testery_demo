@@ -43,6 +43,7 @@ def display_ph(request):
 
 def wypozycz_tester(request, numer_seryjny):
     item = get_object_or_404(Tester, numer_seryjny=numer_seryjny)
+    numer = int(numer_seryjny)
 
     if request.method == "POST":
         form = testerForm(request.POST, instance = item)
@@ -64,5 +65,13 @@ def historia_ph(request):
     return render(request, 'phandlowy.html', context)
 
 
-def dodaj_ph(request):
-    
+def dodaj_ph(request, numer_seryjny):
+    item = get_object_or_404(Tester, numer_seryjny=numer_seryjny)
+    if request.method == "POST":
+        form = nowyPhForm(request.POST)
+        form.save()
+        return redirect('wypozycz_tester')
+
+    else:
+        form = nowyPhForm(instance=item)
+        return render(request, 'wypozycz.html', {'form': form})
