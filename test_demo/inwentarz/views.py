@@ -65,12 +65,14 @@ def historia_ph(request):
     return render(request, 'phandlowy.html', context)
 
 
-def dodaj_ph(request):
+def dodaj_ph(request, numer_seryjny):
+    item = get_object_or_404(Tester, numer_seryjny=numer_seryjny)
+    numer = item.numer_seryjny
     if request.method == "POST":
         form = nowyPhForm(request.POST)
         form.save()
-        return redirect('display_testery')
+        return redirect('wypozycz_tester', numer)
 
     else:
         form = nowyPhForm()
-        return render(request, 'wypozycz.html', {'form': form})
+        return render(request, 'nowy_ph.html', {'form': form, 'numer':numer})

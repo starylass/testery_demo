@@ -4,13 +4,10 @@
 
   <div class="container">
 
-    {{ numer }}
 
     <form method="POST">
       <br><br>
       {% csrf_token %}
-
-      <a class="btn btn-primary btn-sm" href="{% url 'dodaj_ph' numer %}" role="button" name="dodaj_ph">Dodaj PH</a>
 
       {% for field in form %}
       <div class="form-group-row">
@@ -21,7 +18,7 @@
       </div>
       {% endfor %}
       <br><br>
-      <button type="submit" class="btn btn-primary" name="button">Wypożycz</button>
+      <button type="submit" class="btn btn-primary" name="button">dodaj</button>
     </form>
 
   </div>
