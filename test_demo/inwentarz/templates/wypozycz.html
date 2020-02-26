@@ -4,9 +4,15 @@
 
   <div class="container">
 
+    <td>{{ numer }}</td>
+
     <form method="POST">
       <br><br>
       {% csrf_token %}
+
+      <td>{{ numer }}</td>
+
+      <a class="btn btn-primary btn-sm" href="{% url 'dodaj_ph' %}" role="button">Dodaj PH</a>
 
       {% for field in form %}
       <div class="form-group-row">
