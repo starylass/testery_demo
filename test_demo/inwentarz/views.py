@@ -10,7 +10,6 @@ def index(request):
 
 def display_testery(request):
     items = Tester.objects.all()
-    print(items)
     context = {
         'items': items,
     }
@@ -44,7 +43,7 @@ def display_ph(request):
 
 def wypozycz_tester(request, numer_seryjny):
     item = get_object_or_404(Tester, numer_seryjny=numer_seryjny)
-    numer = int(numer_seryjny)
+    numer = item.numer_seryjny
 
     if request.method == "POST":
         form = testerForm(request.POST, instance = item)
@@ -54,7 +53,7 @@ def wypozycz_tester(request, numer_seryjny):
 
     else:
         form = testerForm(instance=item)
-        return render(request, 'wypozycz.html', {'form': form})
+        return render(request, 'wypozycz.html', {'form': form, 'numer':numer})
 
 
 def historia_ph(request):
@@ -68,11 +67,12 @@ def historia_ph(request):
 
 def dodaj_ph(request, numer_seryjny):
     item = get_object_or_404(Tester, numer_seryjny=numer_seryjny)
+    numer = item.numer_seryjny
     if request.method == "POST":
         form = nowyPhForm(request.POST)
         form.save()
-        return redirect('wypozycz_tester')
+        return redirect('wypozycz_tester', numer)
 
     else:
-        form = nowyPhForm(instance=item)
-        return render(request, 'wypozycz.html', {'form': form})
+        form = nowyPhForm()
+        return render(request, 'nowy_ph.html', {'form': form, 'numer':numer})

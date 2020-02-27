@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^historia_ph/<phandlowy_id>', historia_ph, name='historia_ph'),
 
     url(r'^wypozycz_tester/(?P<numer_seryjny>\d+)$', wypozycz_tester, name='wypozycz_tester'),
-    url(r'^dodaj_ph$', dodaj_ph, name='dodaj_ph'),
+    url(r'^dodaj_ph/(?P<numer_seryjny>\d+)$', dodaj_ph, name='dodaj_ph'),
 ]
