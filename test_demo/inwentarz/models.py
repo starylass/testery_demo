@@ -2,6 +2,21 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 
 
+class DHandlowiec(models.Model):
+    imie = models.CharField(max_length=200)
+    nazwisko = models.CharField(max_length=200)
+    email = models.EmailField()
+    telefon = models.IntegerField()
+    history = HistoricalRecords()
+
+
+    class Meta:
+        verbose_name_plural = "Siły sprzdażowe - Delphi"
+
+
+    def __str__(self):
+        return self.imie+" "+self.nazwisko
+
 
 class Firma(models.Model):
     nazwa = models.CharField(max_length=200, primary_key=True)
@@ -9,9 +24,24 @@ class Firma(models.Model):
     miejscowosc = models.CharField(max_length=200)
     kod_pocztowy = models.CharField(max_length=200)
     history = HistoricalRecords()
+    dhandlowiec = models.ForeignKey(DHandlowiec, on_delete=models.CASCADE)
+
 
     class Meta:
         verbose_name_plural = "Klienci"
+
+
+    def __str__(self):
+        return self.nazwa
+
+
+class Filia(models.Model):
+    nazwa = models.CharField(max_length=200, primary_key=True)
+    ulica = models.CharField(max_length=200)
+    miejscowosc = models.CharField(max_length=200)
+    kod_pocztowy = models.CharField(max_length=200)
+    firma = models.ForeignKey(Firma, on_delete=models.CASCADE)
+    history = HistoricalRecords()
 
 
     def __str__(self):
@@ -24,27 +54,12 @@ class Phandlowy(models.Model):
     email = models.EmailField()
     telefon = models.IntegerField()
     firma = models.ForeignKey(Firma, on_delete=models.CASCADE)
+    filia = models.ForeignKey(Filia, on_delete=models.CASCADE)
     history = HistoricalRecords()
+
 
     class Meta:
         verbose_name_plural = "Siły sprzdażowe - Klient"
-
-
-    def __str__(self):
-        return self.imie+" "+self.nazwisko
-
-
-class DHandlowiec(models.Model):
-    imie = models.CharField(max_length=200)
-    nazwisko = models.CharField(max_length=200)
-    email = models.EmailField()
-    telefon = models.IntegerField()
-    firma = models.ForeignKey(Firma, on_delete=models.CASCADE, default = 'Delphi')
-    history = HistoricalRecords()
-
-
-    class Meta:
-        verbose_name_plural = "Siły sprzdażowe - Delphi"
 
 
     def __str__(self):
